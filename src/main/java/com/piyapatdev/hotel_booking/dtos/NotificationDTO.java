@@ -2,15 +2,13 @@ package com.piyapatdev.hotel_booking.dtos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.piyapatdev.hotel_booking.enums.BookingStatus;
-import com.piyapatdev.hotel_booking.enums.PaymentStatus;
+import com.piyapatdev.hotel_booking.enums.NotificationType;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,23 +17,20 @@ import java.time.LocalDateTime;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class BookingDTO {
+public class NotificationDTO {
     private Long id;
 
-    private UserDTO user;
+    @NotBlank(message = "Subject is required")
+    private String subject;
 
-    private RoomDTO room;
-    private Long roomId;
+    @NotBlank(message = "Recipient is required")
+    private String recipient;
 
-    private PaymentStatus paymentStatus;
+    private String body;
 
-    private LocalDate checkInDate;
-    private LocalDate checkOutDate;
-
-    private BigDecimal totalPrice;
     private String bookingReference;
+
+    private NotificationType type;
+
     private LocalDateTime createdAt;
-
-    private BookingStatus bookingStatus;
-
 }
