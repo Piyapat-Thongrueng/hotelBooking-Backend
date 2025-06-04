@@ -39,7 +39,4 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
                    OR LOWER(r.description) LIKE LOWER(CONCAT('%', :searchParam, '%'))
             """)
     List<Room> searchRooms(@Param("searchParam") String searchParam);
-
-    @Query("SELECT DISTINCT r.type FROM room r")
-    List<RoomType>getAllRoomTypes();
 }
