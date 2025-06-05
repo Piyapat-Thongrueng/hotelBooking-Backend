@@ -137,7 +137,7 @@ public class RoomServiceImpl implements RoomService {
 
         //validation: Ensure the check-in date is not same as check out date
         if (checkInDate.isEqual(checkOutDate)){
-            throw new InvalidBookingStateAndDateException("check in date cannot be equal to check out date ");
+            throw new InvalidBookingStateAndDateException("check in date cannot be equal to check out date");
         }
 
         List<Room> roomList = roomRepository.findAvailableRooms(checkInDate, checkOutDate, roomType);
