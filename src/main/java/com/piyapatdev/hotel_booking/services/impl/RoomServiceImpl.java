@@ -31,14 +31,16 @@ public class RoomServiceImpl implements RoomService {
     private final RoomRepository roomRepository;
     private final ModelMapper modelMapper;
 
-    private static final String IMAGE_DIRECTORY = System.getProperty("user.dir") + "/product-image/";
+//    private static final String IMAGE_DIRECTORY = System.getProperty("user.dir") + "/product-image/";
+
+    private static final String IMAGE_DIRECTORY_FRONTEND = "D:\\Java-Projects\\hotel-booking-frontend/public/rooms/";
 
     @Override
     public Response addRoom(RoomDTO roomDTO, MultipartFile imageFile) {
         Room roomToSave = modelMapper.map(roomDTO, Room.class);
 
         if (imageFile != null){
-            String imagePath = saveImage(imageFile);
+            String imagePath = saveImageToFrontend(imageFile);
             roomToSave.setImageUrl(imagePath);
         }
 
@@ -56,7 +58,7 @@ public class RoomServiceImpl implements RoomService {
                 .orElseThrow(()-> new NotFoundException("Room not found"));
 
         if (imageFile != null && !imageFile.isEmpty()){
-            String imagePath = saveImage(imageFile);
+            String imagePath = saveImageToFrontend(imageFile);
             existingRoom.setImageUrl(imagePath);
         }
 
@@ -170,14 +172,39 @@ public class RoomServiceImpl implements RoomService {
     }
 
 
+    //HELPER METHOD BELOW HERE
 
+    //save image to backend folder
+//    private String saveImage(MultipartFile imageFile){
+//        if (!imageFile.getContentType().startsWith("image/")){
+//            throw new IllegalArgumentException("Only Image files are allowed");
+//        }
+//
+//        File directory = new File(IMAGE_DIRECTORY);
+//
+//        if (!directory.exists()){
+//            directory.mkdir();
+//        }
+//        //Generate unique file name for the image
+//        String uniqueFileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+//        //get the absolute path of the image
+//        String imagePath = IMAGE_DIRECTORY + uniqueFileName;
+//
+//        try {
+//            File destinationFile = new File(imagePath);
+//            imageFile.transferTo(destinationFile);
+//        }catch (Exception ex){
+//            throw new IllegalArgumentException(ex.getMessage());
+//        }
+//        return imagePath;
+//    }
 
-    private String saveImage(MultipartFile imageFile){
+    //save image to frontend folder
+    private String saveImageToFrontend(MultipartFile imageFile){
         if (!imageFile.getContentType().startsWith("image/")){
             throw new IllegalArgumentException("Only Image files are allowed");
         }
-
-        File directory = new File(IMAGE_DIRECTORY);
+        File directory = new File(IMAGE_DIRECTORY_FRONTEND);
 
         if (!directory.exists()){
             directory.mkdir();
@@ -185,14 +212,14 @@ public class RoomServiceImpl implements RoomService {
         //Generate unique file name for the image
         String uniqueFileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
         //get the absolute path of the image
-        String imagePath = IMAGE_DIRECTORY + uniqueFileName;
+        String  imagePath = IMAGE_DIRECTORY_FRONTEND + uniqueFileName;
 
         try {
             File destinationFile = new File(imagePath);
             imageFile.transferTo(destinationFile);
         }catch (Exception ex){
-            throw new IllegalArgumentException(ex.getMessage());
+            throw  new IllegalArgumentException(ex.getMessage());
         }
-        return imagePath;
+        return "/rooms/" + uniqueFileName;
     }
 }

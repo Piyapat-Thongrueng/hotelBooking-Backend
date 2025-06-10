@@ -107,7 +107,7 @@ public class BookingServiceImpl implements BookingService {
         bookingRepository.save(booking); //save to database
 
         //generate the payment url which will be sent via mail
-        String paymentUrl = "http://localhost:5174/payment/" + bookingReference + "/" + totalPrice;
+        String paymentUrl = "http://localhost:5173/payment/" + bookingReference + "/" + totalPrice;
 
         log.info("PAYMENT LINK: {}", paymentUrl);
 
