@@ -66,7 +66,7 @@ This project is a comprehensive RESTful API for a hotel booking platform, built 
 
 ## Build and Run the project
 
-open Terminal in IDE and run command Maven in order to download all relavant dependencies and run the project.
+Open Terminal in IDE and run command Maven in order to download all relevant dependencies and run the project.
 
 
     mvn clean install
