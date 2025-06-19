@@ -34,3 +34,48 @@ This project is a comprehensive RESTful API for a hotel booking platform, built 
 
     git clone https://github.com/Piyapat-Thongrueng/hotelBooking-Backend.git
 
+## Database Setup
+
+-   Open your Relational Database such as MySQL Workbench or DBeaver.
+- Create a new database schema for this project.
+
+        CREATE DATABASE hotel_booking_db;
+
+## Spring Boot project setup
+
+
+    server.port=9090
+    
+    # MYSQL CONNECTION
+    spring.datasource.url=jdbc:mysql://localhost:3306/hotel_booking_db
+    spring.datasource.username= your-mysql-username
+    spring.datasource.password= your-mysql-password
+    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+    spring.jpa.hibernate.ddl-auto=update
+    secreteJwtString = your-very-long-and-secret-jwt-string-that-no-one-knows
+    
+    # STRIPE CONFIGURATION
+    stripe.api.secret.key=sk_test_your_stripe_secret_key_here
+    
+    # EMAIL CONFIGURATION
+    spring.mail.host=smtp.gmail.com spring.mail.port=587
+    spring.mail.username=your-email@gmail.com 
+    spring.mail.password=your-google-app-password
+    spring.mail.properties.mail.smtp.auth=true
+    spring.mail.properties.mail.smtp.starttls.enable=true
+
+## Build and Run the project
+
+open Terminal in IDE and run command Maven in order to download all relavant dependencies and run the project.
+
+
+    mvn clean install
+    mvn spring-boot:run
+
+
+      
+
+
+    
+    
+
